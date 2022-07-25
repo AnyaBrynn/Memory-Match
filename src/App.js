@@ -3,15 +3,15 @@ import './App.css';
 import SingleCard from './Components/SingleCard';
 
 const cardImages = [
-  { "src": "/img/bee.png" },
-  { "src": "/img/buffalo.png" },
-  { "src": "/img/bullfinch.png" },
-  { "src": "/img/chameleon.png" },
-  { "src": "/img/clown-fish.png" },
-  { "src": "/img/crab.png" },
-  { "src": "/img/fox.png" },
-  { "src": "/img/frog.png" },
-  { "src": "/img/shark.png" },
+  { "src": "/img/bee.png", matched:false },
+  { "src": "/img/buffalo.png", matched:false  },
+  { "src": "/img/bullfinch.png", matched:false  },
+  { "src": "/img/chameleon.png", matched:false  },
+  { "src": "/img/clown-fish.png", matched:false  },
+  { "src": "/img/crab.png", matched:false  },
+  { "src": "/img/fox.png", matched:false  },
+  { "src": "/img/frog.png", matched:false  },
+  { "src": "/img/shark.png", matched:false  },
 
 ]
 
@@ -42,6 +42,15 @@ function App() {
   useEffect(() => {
     if (firstPick && secondPick) {
       if (firstPick.src === secondPick.src) {
+        setCards(prevCards => {
+          return prevCards.map(card => {
+            if (card.src === firstPick.src) {
+              return { ...card, matched: true }
+            } else {
+              return card
+            }
+          })
+        })
         resetTurn()
       }
       else {
@@ -66,7 +75,12 @@ function App() {
 
       <div className="card-layout">
         {cards.map(card => (
-            <SingleCard key={card.id} card={card} handlePick={handlePick}/>
+            <SingleCard 
+              key={card.id} 
+              card={card} 
+              handlePick={handlePick} 
+              flipped={card === firstPick || card === secondPick || card.matched} 
+            />
           ))}
       </div>
 
