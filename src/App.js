@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css';
 import SingleCard from './Components/SingleCard';
 
@@ -19,6 +19,9 @@ function App() {
 
   const [cards, setCards] = useState([])
   const [turns, setTurns] = useState(0)
+  const [firstPick, setFirstPick] = useState(null)
+  const [secondPick, setSecondPick] = useState(null)
+
 
   // shuffle cards 
   const shuffleCards = () => {
@@ -30,6 +33,32 @@ function App() {
     setTurns(0)
   }
 
+  // handle user pick 
+  const handlePick = (card) => {
+    firstPick ? setFirstPick(card) : setSecondPick(card)
+  }
+
+  // compare cards picked 
+  useEffect(() => {
+    if (firstPick && secondPick) {
+      if (firstPick.src === secondPick.src) {
+        resetTurn()
+      }
+      else {
+        resetTurn()
+      }
+    } 
+  }, [firstPick, secondPick])
+  
+
+  // reset picks & increment turn counter
+  const resetTurn = () => {
+    setFirstPick(null)
+    setSecondPick(null)
+    setTurns(prevTurns => prevTurns + 1)
+  }
+
+
   return (
     <div className="App">
       <h1>Animal Memory Match</h1>
@@ -37,7 +66,7 @@ function App() {
 
       <div className="card-layout">
         {cards.map(card => (
-            <SingleCard key={card.id} card={card}/>
+            <SingleCard key={card.id} card={card} handlePick={handlePick}/>
           ))}
       </div>
 
