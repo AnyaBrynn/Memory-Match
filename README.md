@@ -1,10 +1,9 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## About
 
 This is an interactive memory match game that can be run from your local machine. It was built after completing The Net Ninja's React course on Udemy. 
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## To Run the App 
 
