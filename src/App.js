@@ -73,11 +73,6 @@ function App() {
     setDisabled(false)
   }
 
-  // start new game automatically
-  useEffect(() => {
-    shuffleCards()
-  }, [])
-
   return (
     <div className="App">
       <h1>Animal Memory Match</h1>
